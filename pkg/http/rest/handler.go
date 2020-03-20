@@ -60,6 +60,12 @@ func (connection Connection) addBeerReview(response http.ResponseWriter, request
 		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
 		return
 	}
+	_, err = listing.GetBeer(connection.Beers, id)
+	if err != nil {
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
+		return
+	}
 	review.BeerID = id
 	result, err := adding.AddBeerReview(connection.Reviews, review)
 	if err != nil {
