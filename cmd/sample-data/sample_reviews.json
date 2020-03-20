@@ -1,0 +1,38 @@
+[
+    {
+       "first_name":"Joe",
+       "last_name":"Tribiani",
+       "score":5,
+       "text":"This is good but this is not pizza!"
+    },
+    {
+       "first_name":"Chandler",
+       "last_name":"Bing",
+       "score":1,
+       "text":"I would SO NOT drink this ever again."
+    },
+    {
+       "first_name":"Ross",
+       "last_name":"Geller",
+       "score":4,
+       "text":"Drank while on a break, was pretty good!"
+    },
+    {
+       "first_name":"Phoebe",
+       "last_name":"Buffay",
+       "score":2,
+       "text":"Wasn't that great, so I gave it to my smelly cat."
+    },
+    {
+       "first_name":"Monica",
+       "last_name":"Geller",
+       "score":5,
+       "text":"AMAZING! Like Chandler's jokes!"
+    },
+    {
+       "first_name":"Rachel",
+       "last_name":"Green",
+       "score":5,
+       "text":"So yummy, just like my beef and custard trifle."
+    }
+ ]
