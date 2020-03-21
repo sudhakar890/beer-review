@@ -21,8 +21,10 @@ type Connection struct {
 }
 
 func main() {
+	//Env
+	dBConnection := os.Getenv("DB_CONNECTION")
 	//Mongodb Client
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://user1:user123@cluster0-9tn5d.azure.mongodb.net/test?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(dBConnection))
 	if err != nil {
 		log.Panic(err)
 	}
@@ -40,14 +42,12 @@ func main() {
 	}
 
 	//Adding sample data of beers
-	beersFile, err := os.Open("sample_beers.json")
+	beersFile, err := ioutil.ReadFile("/data/sample_beers.json")
 	if err != nil {
 		log.Panic(err)
 	}
-	defer beersFile.Close()
-	byteValue, _ := ioutil.ReadAll(beersFile)
 	var defaultBeers []adding.Beer
-	json.Unmarshal(byteValue, &defaultBeers)
+	json.Unmarshal(beersFile, &defaultBeers)
 	result := adding.AddBeer(connection.Beers, defaultBeers...)
 	log.Println("Added sample beers data to database")
 
@@ -57,14 +57,12 @@ func main() {
 		var id = v.InsertedID.(primitive.ObjectID)
 		beerIds = append(beerIds, id)
 	}
-	reviewsFile, err := os.Open("sample_reviews.json")
+	reviewsFile, err := ioutil.ReadFile("/data/sample_reviews.json")
 	if err != nil {
 		log.Panic(err)
 	}
-	defer reviewsFile.Close()
-	bytes, _ := ioutil.ReadAll(reviewsFile)
 	var defaultReviews []adding.Review
-	json.Unmarshal(bytes, &defaultReviews)
+	json.Unmarshal(reviewsFile, &defaultReviews)
 	for i := range defaultReviews {
 		if i%2 == 0 {
 			defaultReviews[i].BeerID = beerIds[0]

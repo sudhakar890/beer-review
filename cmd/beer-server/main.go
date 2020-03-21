@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"github.com/sudhakar890/beer-review/pkg/http/rest"
@@ -11,10 +12,12 @@ import (
 )
 
 func main() {
+	//Env
+	dBConnection := os.Getenv("DB_CONNECTION")
 	//Mongodb Client
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://<user>:<password>@cluster0-9tn5d.azure.mongodb.net/test?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(dBConnection))
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	}
 	// Context for timeout of 5 secs
 	var ctx, _ = context.WithTimeout(context.Background(), 5*time.Second)
