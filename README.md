@@ -51,7 +51,7 @@ POST /beers/{id}/reviews
 ```
 
 ## Getting started
-These instructions will install MongoDB, Beer-review API server, and load sample data into the database.
+These instructions will install MongoDB, load sample data into database, and install Beer-review API server.
 
 ### Prerequisites
 * Docker
