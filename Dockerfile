@@ -15,7 +15,10 @@ RUN cp /build/beer-server ./server && cp /build/sample-data ./data
 
 # Create the minimal runtime image
 FROM alpine:3.11
-ENV CONNECTION ""
+ENV DB_USER ""
+ENV DB_PASSWORD ""
+ENV DB_USER_FILE ""
+ENV DB_PASSWORD_FILE ""
 COPY --from=builder /build/cmd/sample-data/*.json /data/
 COPY --from=builder /dist/* /app/
 WORKDIR /app
