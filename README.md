@@ -49,3 +49,16 @@ POST /beers/{id}/reviews
 #     "text":"This is good but this is not pizza!"
 # }
 ```
+
+## Getting started
+These instructions will get the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+* Docker
+* Docker compose
+* Update MongoDB username and password in db_user.tx and db_password.tx
+
+### Installing
+``` bash
+docker-compose up
+```
