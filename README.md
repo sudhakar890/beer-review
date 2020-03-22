@@ -56,7 +56,7 @@ These instructions will get the project up and running on your local machine for
 ### Prerequisites
 * Docker
 * Docker compose
-* Update MongoDB username and password in db_user.tx and db_password.tx
+* Update MongoDB username and password in `db_user.tx` and `db_password.tx`
 
 ### Installing
 ``` bash
