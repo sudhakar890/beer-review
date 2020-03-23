@@ -53,12 +53,28 @@ POST /beers/{id}/reviews
 ## Getting started
 These instructions will install MongoDB, load sample data into database, and install Beer-review API server.
 
-### Prerequisites
+### Using Docker
+
+#### Prerequisites
 * Docker
 * Docker compose
 * Update MongoDB username and password in `db_user.txt` and `db_password.txt`
 
-### Installing
+#### Installing
 ``` bash
 docker-compose up
+```
+
+### Using Kubernetes
+
+#### Prerequisites
+* Docker desktop or Minikube or Kubernetes cluster
+* Update MongoDB username and password in `db_user.txt` and `db_password.txt`
+* Create a kubernetes secret from cli
+``` bash
+kubectl create secret generic db-user-pass --from-file=./db_user.txt --from-file=./db_password.txt
+```
+#### Installing
+``` bash
+kubectl apply -f kubernetes/
 ```
