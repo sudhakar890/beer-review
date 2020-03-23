@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beer-review
+  labels:
+    app: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      initContainers:
+      - name: sample-data
+        image: sudhakar890/beer-review:v1
+        command: ['/app/data']
+        env:
+        - name: DB_USER_FILE
+          value: /etc/secret/db_user.txt
+        - name: DB_PASSWORD_FILE
+          value: /etc/secret/db_password.txt
+        volumeMounts:
+        - name: secret
+          mountPath: /etc/secret
+          readOnly: true
+      volumes:
+      - name: secret
+        secret:
+          secretName: db-user-pass
+      containers:
+      - name: beer-review
+        image: sudhakar890/beer-review:v1
+        command: ['/app/server']
+        env:
+        - name: DB_USER_FILE
+          value: /etc/secret/db_user.txt
+        - name: DB_PASSWORD_FILE
+          value: /etc/secret/db_password.txt
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: secret
+          mountPath: /etc/secret
+          readOnly: true
+      volumes:
+      - name: secret
+        secret:
+          secretName: db-user-pass
